@@ -1,13 +1,44 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Improvement Projects for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Improvement week",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Portfolio",
+        "sql": "select code,title,owner,status,phase,due_on from v_portfolio order by code"
+      },
+      {
+        "title": "Evidence to review",
+        "sql": "select code,overdue_actions,benefits_waiting,controls_at_risk,approved_phases from v_portfolio order by code"
+      },
+      {
+        "title": "Attention",
+        "sql": "select * from v_attention order by code,finding"
+      }
+    ]
+  },
+  {
+    "name": "benefits",
+    "title": "Benefit evidence",
+    "sections": [
+      {
+        "title": "Separate currencies and hard or soft benefits",
+        "note": "Proposals are not realised savings. Only current independent reviews are marked verified.",
+        "sql": "select currency,kind,review,sum(amount_cents)::bigint as amount_cents from v_benefits group by currency,kind,review order by currency,kind,review"
+      }
+    ]
+  },
+  {
+    "name": "sustain",
+    "title": "Sustain the change",
+    "sections": [
+      {
+        "title": "Measures",
+        "sql": "select code,name,unit,baseline,target,latest_value,result from v_metrics order by code,name"
+      },
+      {
+        "title": "Control checks",
+        "sql": "select code,title,owner,due_on,last_result,finding from v_controls order by due_on"
       }
     ]
   }

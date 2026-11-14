@@ -1,11 +1,52 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
-    "file": "name",
+    "name": "a3",
+    "title": "A3 improvement review",
+    "for_each": "select id,code from projects order by code",
+    "file": "code",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Project brief",
+        "layout": "record",
+        "sql": "select code,title,owner,sponsor,problem,goal,process,phase,status,revision from projects where id=$1"
+      },
+      {
+        "title": "Measures and evidence gaps",
+        "sql": "select name,unit,baseline,target,latest_value,observed_on,result from v_metrics where project_id=$1"
+      },
+      {
+        "title": "Countermeasures",
+        "sql": "select title,owner,due_on,status,evidence from actions where project_id=$1 order by due_on"
+      },
+      {
+        "title": "Phase review evidence",
+        "sql": "select phase,revision,actor,evidence,created_at from phase_reviews where project_id=$1 order by created_at"
+      },
+      {
+        "title": "Follow-up checks",
+        "sql": "select title,owner,due_on,last_result,finding from v_controls where project_id=$1"
+      },
+      {
+        "title": "Notes",
+        "sql": "select actor,note,created_at from activity where project_id=$1 and action='note' order by sequence"
+      }
+    ]
+  },
+  {
+    "name": "benefit-register",
+    "title": "Benefit evidence register",
+    "for_each": "select id,code from projects order by code",
+    "file": "code",
+    "sections": [
+      {
+        "title": "Benefits awaiting or holding review",
+        "note": "Hard and soft values are separate; no conversion or annualisation. This document does not certify savings.",
+        "sql": "select title,kind,currency,period_on,amount_cents,evidence,recorded_by,verified_by,verification_evidence,review from v_benefits where project_id=$1 order by currency,kind,period_on"
+      },
+      {
+        "title": "Voided entries retained for review",
+        "sql": "select title,kind,currency,period_on,amount_cents,void_reason,voided_by from benefits where project_id=$1 and void_reason is not null"
+      }
     ]
   }
 ]

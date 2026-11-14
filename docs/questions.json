@@ -1,0 +1,42 @@
+[
+  [
+    "Which projects combine overdue actions and unreviewed benefits?",
+    "portfolio"
+  ],
+  [
+    "Which phase reviews refer to the current project brief?",
+    "phase-queue"
+  ],
+  [
+    "Which claimed savings still need a separate finance review?",
+    "benefit-review"
+  ],
+  [
+    "How much is verified, by currency and by hard or soft benefit?",
+    "benefits"
+  ],
+  [
+    "Which measures still miss their targets after a trial?",
+    "measures"
+  ],
+  [
+    "Which completed improvements have a failed follow-up check?",
+    "sustain-due"
+  ],
+  [
+    "Which owner has overdue actions across several projects?",
+    "owner-load"
+  ],
+  [
+    "Which projects have not had a review for 30 days?",
+    "stale-projects"
+  ],
+  [
+    "Which projects containing personal information need a retention review?",
+    "compliance"
+  ],
+  [
+    "Who changed a project and what evidence did they record?",
+    "activity"
+  ]
+]

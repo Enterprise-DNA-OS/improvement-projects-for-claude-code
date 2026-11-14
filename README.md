@@ -1,115 +1,124 @@
-<h1 align="center">Improvement Projects for Claude Code</h1>
+# Improvement Projects for Claude Code
 
-<p align="center">
-  <strong>The open-source improvement project system that is just a database and Claude Code.</strong>
-</p>
+Know which process changes worked, which savings have evidence, and which controls slipped.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+| Do it yourself | We customise it | We run it for you |
+|---|---|---|
+| Free, MIT. Install the database and command recipes. | Your fields, review rules and agreed Minitab Engage records brought across. [Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=minitab-engage). | Installed, connected and operated through Omni by Enterprise DNA. One setup fee, then a retainer. [Book a call](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=minitab-engage). |
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your Minitab Engage data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=minitab-engage">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/minitab-engage?utm_source=github&utm_medium=readme&utm_campaign=minitab-engage">How it works</a></td>
-  </tr>
-</table>
+For manufacturers and operations teams running continuous-improvement projects. Keep the problem, baseline, countermeasures, phase decisions, benefit evidence and follow-up checks together. The database is the product; Claude Code, Codex, OpenCode or Cursor is the door. Read AGENTS.md for the shared instructions.
 
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-minitab-engage">Instead of Minitab Engage</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
-
----
-
-## What is this
-
-Improvement Projects for Claude Code does the job you pay Minitab Engage for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the Minitab Engage dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays Minitab Engage per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=minitab-engage).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
+Minitab Engage's current buying page directs buyers to sales. A historical vendor-hosted US government schedule gives a five-figure annual scenario for a small team; this is not a verified NZ/AU customer bill or a current commercial quote. [Selection evidence](docs/research.md) explains the source and limits.
 
 ## Quick start
-
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
 
 ```bash
 git clone https://github.com/Enterprise-DNA-OS/improvement-projects-for-claude-code.git
 cd improvement-projects-for-claude-code
 npm install
 npm run demo
+npm run improvements -- attention
+npm run view
+npm run docs
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+Node 20 or newer. PGlite runs locally in .data/db without a separate database install. Demo data is fictional. For working data, use a separate DATA_DIR, run migrate and import, and do not run seed. DATABASE_URL selects PostgreSQL 15 or newer; use an operator role with appropriate privileges. The schema enables row security without public access policies. This is a trusted-operator system, not a tenant-facing service. Test backups and configure access before sharing it.
 
-### Use it with your own Postgres or Supabase
+## The recurring jobs
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
-
-## The commands
-
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
-
-| Command | What it does |
+| Command | Result |
 |---|---|
-| `/...` | ... |
+| /portfolio | Read the project portfolio and open evidence counts |
+| /phase-queue | Find project phases needing current review |
+| /attention | Find overdue work, evidence gaps and failed checks |
+| /benefits | Separate hard and soft benefits by currency and review state |
+| /benefit-review | Read the benefit entries awaiting finance review |
+| /measures | Compare each baseline, latest observation and target |
+| /sustain-due | Read failed and due follow-up controls |
+| /owner-load | Count active projects and overdue actions by owner |
+| /stale-projects | Find projects without a review in 30 days |
+| /compliance | Check recorded evidence and personal-information retention dates |
+| /activity | Read the ordered change and note history |
+| /help | List commands and accepted options |
+| /list | Read one collection of records |
+| /show | Read a project or another named record |
+| /weekly-review | Prepare the Monday review from portfolio, attention and benefits |
+| /add | Add a project, action, metric, benefit or control |
+| /update | Change project, action or control fields |
+| /log | Record a review note against a project |
+| /record-measure | Record an observation with date and evidence |
+| /review-phase | Record a human phase review after the evidence checks pass |
+| /verify-benefit | Record a separate reviewer and supporting evidence |
+| /void-benefit | Exclude an incorrect benefit while retaining its evidence |
+| /record-check | Record a pass or failure for a follow-up control |
+| /import | Bring Minitab Engage project exports into the database |
+| /export | Write a complete JSON export or a spreadsheet-safe CSV |
+| /draft-a3 | Draft an A3 review from current records |
+| /draft-benefits | Draft the list of benefit claims needing review |
+| /docs | Render the A3 and benefit paperwork |
+| /view | Render the week, benefits and sustain reports |
+| /customise | Change fields and rules through a tested migration |
+| /new-view | Add a read-only report in the business's words |
 
-## Instead of Minitab Engage
+All 27 CLI commands support --json. Write operations require --actor. Options use --key=value. Read help for options, and the matching .claude/commands file for the operating recipe. Ambiguous names fail and list candidates. Use an exact ID when records share a name.
 
-<!-- TODO(author): how to bring data across from Minitab Engage; link docs/replace-minitab-engage.md -->
+## Evidence before completion
 
-## Architecture
+Define, measure, analyze, improve and control reviews are recorded with a person and evidence reference. Review the problem, owner, sponsor and goal first. Measurement review needs a baseline. Improve review needs observations. Completion needs current earlier reviews, all measures at target, closed actions, current passing follow-up checks and reviewed benefits.
 
+Changing the project brief or adding a new metric invalidates earlier phase and benefit reviews. A completed project reopens after its brief changes. New failed checks and off-target observations stay visible even after closure. A note refreshes the review date but never approves a phase. Verified benefits mean a separate named person recorded their review of that project revision, not that the software independently audited a saving. Hard and soft benefits and different currencies are never combined. Void a mistaken benefit with a reason and enter its correction separately; the original remains in history and exports.
+
+## Ten questions to ask
+
+These are checks the CLI answers today, not claims that Engage cannot be configured to report the same data.
+
+1. Which projects combine overdue actions and unreviewed benefits? Use /portfolio.
+2. Which phase reviews refer to the current project brief? Use /phase-queue.
+3. Which claimed savings still need a separate finance review? Use /benefit-review.
+4. How much is verified, by currency and by hard or soft benefit? Use /benefits.
+5. Which measures still miss their targets after a trial? Use /measures.
+6. Which completed improvements have a failed follow-up check? Use /sustain-due.
+7. Which owner has overdue actions across several projects? Use /owner-load.
+8. Which projects have not had a review for 30 days? Use /stale-projects.
+9. Which projects containing personal information need a retention review? Use /compliance.
+10. Who changed a project and what evidence did they record? Use /activity.
+
+## Your first hour: ten things to ask for
+
+1. Set our business name and colours in brand.json.
+2. Show the overdue actions and their owners.
+3. Explain why the carton waste project needs another check.
+4. Compare the latest changeover measure with its target.
+5. Separate proposed savings from reviewed savings.
+6. Show the phase evidence we still need.
+7. Draft an A3 for the filling line project.
+8. Preview the mapping of our Engage project export.
+9. Add our site code to each project with /customise.
+10. Create a report for the Monday operations meeting with /new-view.
+
+## Bring the Engage projects across
+
+```bash
+npm run improvements -- import minitab-engage --file=projects.csv --source=our-deployment --actor="Migration owner" --dry-run
+npm run improvements -- import minitab-engage --file=projects.csv --source=our-deployment --actor="Migration owner"
 ```
-improvement-projects-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
-```
 
-## Built for coding agents
+Use the documented project column-set CSV export, or extract the collapsed project CSV from the Workflow ZIP. Configured column names can be mapped. Project fields import in one command; diagrams, attachments, nested tasks and benefit schedules need separate mapping. New imported projects await local review. [Full switching guide](docs/replace-minitab-engage.md).
 
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
+## Documents and reports
 
-## Contributing
+Edit brand.json once. npm run docs writes an A3 and benefit register for each project into docs-out/. npm run view writes week, benefit and sustain reports into views/. These are read-only HTML files you can print to PDF. /draft-a3 and /draft-benefits write internal drafts and never send them. /new-view adds another report from the same database.
 
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
+## Checks and limits
 
-## Want it installed and run for you?
+[Compliance sources](docs/compliance.md) distinguish the DMAIC method, local evidence policy and the NZ personal-information retention prompt. Missing evidence is a finding, never a fabricated pass. Actor names and evidence references are operator-supplied. Database administrators can alter history. A hosted version needs real identity and role controls. [Why no front end](docs/why-no-front-end.md) explains the boundary with Engage's visual tools and team interface.
 
-Enterprise DNA installs Improvement Projects for Claude Code for your business, migrates your Minitab Engage data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
+## Validation
 
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=minitab-engage)
-- Read more: [enterprisedna.co/omni/instead-of/minitab-engage](https://enterprisedna.co/omni/instead-of/minitab-engage?utm_source=github&utm_medium=readme&utm_campaign=minitab-engage)
+npm test creates temporary data, migrates, seeds twice, exercises all CLI commands and checks import rollback, repeat imports, mappings, dates, phase gates, stale reviews, independent benefit review, separate currencies, exports, drafts and escaped HTML. The manual GitHub workflow defines Node 20 and 22 on Windows and Linux, plus PostgreSQL 17. TEST_DATABASE_URL must be a disposable empty database; it is never read from a working DATABASE_URL.
 
-## License
+## Make it yours
 
-MIT. Copyright (c) 2026 Enterprise DNA.
+/customise writes and tests a new migration and updates imports, commands and documents. Enterprise DNA builds the agreed web front end, data connections or different stack into your version. Omni by Enterprise DNA installs and runs it for one setup fee, then a retainer. Hosting and agent usage have their own costs. [Spend 30 minutes with Sam](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=minitab-engage).
+
+MIT. Not affiliated with Minitab or Anthropic.
